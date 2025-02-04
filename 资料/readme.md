@@ -1,0 +1,4 @@
+# 常用网站：
+
+1. cppreference[(https://zh.cppreference.com/)](https://zh.cppreference.com/) [(英文版)](https://en.cppreference.com/) [(离线文档)](https://github.com/myfreeer/cppreference2mshelp/releases/download/2024.09/cppreference-zh-20240915.chm)
+2. [winlibs.com](https://winlibs.com/)(提供编译好的GCC/Clang的Windows版本) <br> [GCC 14.2.0 (with POSIX threads) + LLVM/Clang/LLD/LLDB 19.1.1 + MinGW-w64 12.0.0 UCRT - release 2 (LATEST) Win64 7z archive](https://github.com/brechtsanders/winlibs_mingw/releases/download/14.2.0posix-19.1.1-12.0.0-ucrt-r2/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2.7z)
