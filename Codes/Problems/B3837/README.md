@@ -47,3 +47,11 @@ KLMNO
 PQRSTU
 VWXYZAB
 ```
+
+[参考题解](https://www.luogu.com.cn/problem/solution/B3837)
+<details>
+<summary>参考答案（自己写的）</summary>
+<pre><code>暂无
+</code>
+</pre>
+</details>
