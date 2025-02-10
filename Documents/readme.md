@@ -12,11 +12,9 @@
 
 ### 方法二：直接看网上现成的[文章](https://www.cnblogs.com/roger-yu/p/15348275.html)吧
 
-可以把文章里下载的MinGW-w64换成本文档最后的[winlibs](https://winlibs.com/)编译的版本（文章里是`GCC8.1.0`，winlibs截至目前为`GCC14.2.0`），剩余的就按照文章里来。
+可以把文章里下载的MinGW-w64换成本文档最后的[winlibs](https://winlibs.com/)编译的版本（文章里是 `GCC8.1.0`，winlibs截至目前为 `GCC14.2.0`），剩余的就按照文章里来。
 
 ## 关于《C Primer Plus》
-
-关于同学们常提的跟不上老师的节奏这个问题，确实有很大一部分原因是教材和实际应用场景脱节。教材上的内容过于基础，**而且还有少量坑死人的错误**，既然同学们已经有了部分语法基础，不妨抽空翻翻这本书，里面会提到许多细节上的问题，若大家在学习过程中有疑惑而教材上又啥都没有时，可以试试翻翻这本书，或许就能找到你想要的答案；当然，这本书也可以帮助你更进一步了解C语言，还是建议从头到尾看一遍的。（我自己是直接学的C++没看过这本书，但对应的《C++ Primer Plus》也是简单翻过的，里面的内容确实很细节很有帮助，当然我学C++用的书个人认为是很不错的，以后有机会可以推荐给大家）
 
 下面是知乎上对这本书的评价，虽然褒贬不一吧，总体肯定比学校发的教材有用，也不是很必要真的一页一页去啃
 
@@ -73,5 +71,5 @@ c primer plus这本书我之前看过，就跟其他老外的书籍一样，是�
 ## 常用网站：
 
 1. cppreference[(https://zh.cppreference.com/)](https://zh.cppreference.com/) [(英文版)](https://en.cppreference.com/) [(离线文档)](https://github.com/myfreeer/cppreference2mshelp/releases/download/2024.09/cppreference-zh-20240915.chm)
-2. [winlibs.com](https://winlibs.com/)(提供编译好的GCC/Clang的Windows版本) 
-[GCC 14.2.0 (with POSIX threads) + LLVM/Clang/LLD/LLDB 19.1.1 + MinGW-w64 12.0.0 UCRT - release 2 (LATEST) Win64 7z archive](https://github.com/brechtsanders/winlibs_mingw/releases/download/14.2.0posix-19.1.1-12.0.0-ucrt-r2/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2.7z)
+2. [winlibs.com](https://winlibs.com/)(提供编译好的GCC/Clang的Windows版本)
+   [GCC 14.2.0 (with POSIX threads) + LLVM/Clang/LLD/LLDB 19.1.1 + MinGW-w64 12.0.0 UCRT - release 2 (LATEST) Win64 7z archive](https://github.com/brechtsanders/winlibs_mingw/releases/download/14.2.0posix-19.1.1-12.0.0-ucrt-r2/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2.7z)
