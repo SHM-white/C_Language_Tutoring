@@ -49,6 +49,8 @@ ${T<=maxlongint}$
 ## 来源
 蓝桥杯练习系统 ID: 290 原题链接: http://lx.lanqiao.cn/problem.page?gpid=T290
 
+
+[论坛答案](https://blog.csdn.net/qq_45281807/article/details/104427092)(标准递归法)
 <details>
 <summary>参考答案（自己写的）</summary>
 
