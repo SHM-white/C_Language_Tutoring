@@ -36,12 +36,71 @@ int main(){
 ```
 按位运算符：
 
+见cppreference[算术运算符](https://zh.cppreference.com/w/c/language/operator_arithmetic)
+
 - `&`：按位与运算符，两个操作数相应位都为1时，结果才为1，否则为0。
 - `|`：按位或运算符，两个操作数相应位有一个为1时，结果为1，否则为0。
 - `^`：按位异或运算符，两个操作数相应位不同时，结果为1，否则为0。
 - `~`：按位取反运算符，对操作数的每个二进制位取反，即0变1，1变0。
 - `<<`：左移运算符，将操作数的各二进制位向左移动指定的位数。
 - `>>`：右移运算符，将操作数的各二进制位向右移动指定的位数。
+
+实例：
+```c
+#include <stdio.h>
+#include <stdint.h>
+ 
+int main(void)
+{
+    uint32_t a = 0x12345678;
+    uint16_t mask = 0x00f0;
+ 
+    printf("Promoted mask:\t%#010x\n"
+           "Value:\t\t%#x\n"
+           "Setting bits:\t%#x\n"
+           "Clearing bits:\t%#x\n"
+           "Selecting bits:\t%#010x\n"
+           , mask
+           , a
+           , a | mask
+           , a & ~mask
+           , a & mask
+    );
+}
+```
+可能的输出：
+```
+Promoted mask:  0x000000f0
+Value:          0x12345678
+Setting bits:   0x123456f8
+Clearing bits:  0x12345608
+Selecting bits: 0x00000070
+```
+实例：
+```c
+#include <stdio.h>
+enum {ONE=1, TWO=2};
+int main(void)
+{
+    char c = 0x10;
+    unsigned long long ulong_num = 0x123;
+    printf("0x123 << 1  = %#llx\n"
+           "0x123 << 63 = %#llx\n"   // 对无符号数，溢出截断高位
+           "0x10  << 10 = %#x\n",    // char 被提升到 int
+           ulong_num << 1, ulong_num << 63, c << 10);
+    long long long_num = -1000;
+    printf("-1000 >> 1 = %lld\n", long_num >> ONE);  // 实现定义
+}
+```
+可能的输出：
+```
+0x123 << 1  = 0x246
+0x123 << 63 = 0x8000000000000000
+0x10  << 10 = 0x4000
+-1000 >> 1 = -500
+```
+
+补充：[其它运算符](https://zh.cppreference.com/w/c/language/operator_other)
 
 ### 1.2 函数的形参与实参
 
