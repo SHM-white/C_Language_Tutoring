@@ -1,5 +1,5 @@
 # 链表操作函数
-
+[视频演示](https://www.bilibili.com/video/BV1NJ411M7S3/?share_source=copy_web&vd_source=50f551364b1a3340a9149325e92c6314)
 ## 0.链表定义：
 
 ### 单向链表：
