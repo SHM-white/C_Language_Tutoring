@@ -1,2 +1,5 @@
 *.bak
 *.exe
+*.tmp
+./tmp/
+/tmp/
