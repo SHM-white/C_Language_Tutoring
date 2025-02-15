@@ -1,4 +1,5 @@
 # Sort Functions
+[视频演示](https://www.bilibili.com/video/BV1DP4y1n71W/?share_source=copy_web&vd_source=50f551364b1a3340a9149325e92c6314)
 ## Bubble Sort 冒泡排序
 当前阶段掌握这种排序算法即可，如果有时间可以研究一下其他的排序算法。
 ```c
