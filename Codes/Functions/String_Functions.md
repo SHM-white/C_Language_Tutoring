@@ -1,9 +1,10 @@
+# String Functions 字符串操作函数的cppreference简介及可能实现
 ## 1. strcat
 
 strcat, strcat_s
 
-| 在标头 `<string.h>`定义                                                      |     |                    |
-| ------------------------------------------------------------------------------ | --- | ------------------ |
+| 在标头 `<string.h>`定义                                                         |     |              |
+| ------------------------------------------------------------------------------ | --- |--------------|
 | char *strcat(char *dest, const char *src);                                     | (1) | **(C99 前)** |
 | char *strcat(char *restrict dest, const char *restrict src);                   | (1) | **(C99 起)** |
 | errno_t strcat_s(char*restrict dest, rsize_t destsz,const char *restrict src); | (2) | **(C11 起)** |
@@ -19,7 +20,7 @@ strcat, strcat_s
 * 会出现截断（`dest` 末尾的可用空间不能适应 `src` 的每个字符，包括空终止符）
 * 源与目标字符串间会出现重叠
 
- 若 `dest` 所指向的字符数组大小 < [strlen]()(**dest**)**+**[strlen]()(**src**)**+**1 <= `destsz` 则行为未定义；换言之，`destsz` 的错误值不暴露行将发生的缓冲区溢出。 同所有边界检查函数，`strcat_s`，仅若实现定义 **__STDC_LIB_EXT1__** 且用户在包含 [string.h]() 前定义 **__STDC_WANT_LIB_EXT1__** 为整数常量 1 才保证可用。
+ 若 `dest` 所指向的字符数组大小 < [strlen]()(**dest**)** + **[strlen]()(**src**) **+** 1 <= `destsz` 则行为未定义；换言之，`destsz` 的错误值不暴露行将发生的缓冲区溢出。 同所有边界检查函数，`strcat_s`，仅若实现定义 **__STDC_LIB_EXT1__** 且用户在包含 [string.h]() 前定义 **__STDC_WANT_LIB_EXT1__** 为整数常量 1 才保证可用。
 
 ```c
 char *strcat(char *str1, char *str2){
@@ -73,7 +74,7 @@ int strcmp(char *str1, char *str2){
 | 在标头 `<string.h>`定义                          |     |                    |
 | -------------------------------------------------- | --- | ------------------ |
 | size_t strlen(const char *str);                    | (1) |                    |
-| size_t strnlen_s( const char *str, size_t *strsz); | (2) | **(C11 起)** |
+| size_t strnlen_s( const char *str, size_t strsz); | (2) | **(C11 起)** |
 
 **1)** 返回给定空终止字符串的长度，即首元素为 **str** 所指的字符数组中，直至且不包含首个空字符的字符数。
 

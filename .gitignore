@@ -3,3 +3,8 @@
 *.tmp
 ./tmp/
 /tmp/
+tmp*.*
+tmp*
+.vscode/*
+.vscode/settings.json
+.vscode/tasks.json
