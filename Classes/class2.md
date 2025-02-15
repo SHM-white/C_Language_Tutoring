@@ -208,6 +208,7 @@ switch(color){
 ## 2. 题目讲解
 
 - [字符串处理函数](../Codes/Functions/String_Functions.md)
+- [递归函数](../Codes/Functions/Recursion_Functions.md)
 - [排序函数](../Codes/Functions/Sort_Functions.md)(上次讲过)
 - [链表操作函数](../Codes/Functions/List_Functions.md)
 - [文件的读写](https://zh.cppreference.com/w/c/io/fopen)，[实例](../Codes/Usage_Examples/File_Operations.c)
