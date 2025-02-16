@@ -266,8 +266,19 @@ switch(color){
 
 ## 2. 题目讲解
 
+### 考试题目对应文档：
+
 - [字符串处理函数](../Codes/Functions/String_Functions.md)
 - [递归函数](../Codes/Functions/Recursion_Functions.md)
 - [排序函数](../Codes/Functions/Sort_Functions.md)(上次讲过)
 - [链表操作函数](../Codes/Functions/List_Functions.md)
 - [文件的读写](https://zh.cppreference.com/w/c/io/fopen)，[实例](../Codes/Usage_Examples/File_Operations.c)
+
+### OJ题目（挑几个讲）：
+
+- [5-5](../Codes/Problems/ClassHomework_5_id5/README.md)
+- [5-6](../Codes/Problems/ClassHomework_5_id6/README.md)
+- [8-5](../Codes/Problems/ClassHomework_8_id5/README.md)
+- [11-4](../Codes/Problems/ClassHomework_11_id4/README.md)
+- [11-5](../Codes/Problems/ClassHomework_11_id5/README.md)
+- [13-2](../Codes/Problems/ClassHomework_13_id2/README.md)
