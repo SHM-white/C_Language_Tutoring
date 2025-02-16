@@ -227,11 +227,12 @@ enum 枚举类型名{
 例：
 
 ```c
-enum Color{
+typedef enum
+{
     RED,    // 0
     GREEN,  // 1
     BLUE    // 2
-};
+} Color;
 ```
 enum类型可以像普通整型常量一样使用，例如：
 
@@ -282,3 +283,5 @@ switch(color){
 - [11-4](../Codes/Problems/ClassHomework_11_id4/README.md)
 - [11-5](../Codes/Problems/ClassHomework_11_id5/README.md)
 - [13-2](../Codes/Problems/ClassHomework_13_id2/README.md)
+
+`(expression) ? (a) : (b)`
