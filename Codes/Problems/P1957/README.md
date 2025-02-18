@@ -162,4 +162,4 @@ int main(){
     }
 }
 ```
-</detail
+</detail>
