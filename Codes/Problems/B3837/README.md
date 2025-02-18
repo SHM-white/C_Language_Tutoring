@@ -51,7 +51,25 @@ VWXYZAB
 [参考题解](https://www.luogu.com.cn/problem/solution/B3837)
 <details>
 <summary>参考答案（自己写的）</summary>
-<pre><code>暂无
-</code>
-</pre>
+
+```c
+#include <stdio.h>
+int main()
+{
+    int n;
+    char c='A';
+    scanf("%d", &n);
+    for (int i = 1; i <= n; i++) 
+    {
+        for (int j = 1; j <= i; j++) 
+        {
+            printf("%c",c);
+            if(c=='Z')
+                c = 'A'-1;
+            c++;
+        }
+        puts("");
+    }
+}
+```
 </details>

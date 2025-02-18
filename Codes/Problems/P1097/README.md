@@ -54,7 +54,65 @@ NOIP 2007 提高第一题
 [参考题解](https://www.luogu.com.cn/problem/solution/P1097)
 <details>
 <summary>参考答案（自己写的）</summary>
-<pre><code>暂无
-</code>
-</pre>
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+void sort(int *data, int size){
+    for (size_t i = 1; i < size; i++)
+    {
+        for (size_t j = 0; j < size - i - 1; j++)
+        {
+            if(data[j] > data[j + 1]){
+                int tmp = data[j];
+                data[j] = data[j + 1];
+                data[j + 1] = tmp;
+            }
+        }
+    }
+}
+int compare(const void *arg1, const void *arg2){
+    int a = *(int *)arg1;
+    int b = *(int *)arg2;
+    if(a == b){
+        return 0;
+    }
+    return a > b ? 1 : -1;
+}
+int main()
+{
+    int n;
+    scanf("%d", &n);
+    int *dataContent = calloc(n, sizeof(int));
+    for (size_t i = 0; i < n; i++)
+    {
+        scanf("%d", dataContent + i);
+    }
+    qsort(dataContent, n, sizeof(int), compare);
+    // sort(dataContent, n);
+    int lastData = dataContent[0];
+    int counter = 0;
+    for (size_t i = 0; i < n; i++)
+    {
+        if(i == 0){
+            printf("%d", lastData);
+            counter = 1;
+        }else if(lastData != dataContent[i]){
+            printf(" %d\n", counter);
+            counter = 1;
+            printf("%d", dataContent[i]);
+            lastData = dataContent[i];
+        }
+        else
+        {
+            counter++;
+        }
+        if (i == n - 1)
+        {
+            printf(" %d\n", counter);
+        }
+    }
+    
+}
+```
 </details>
