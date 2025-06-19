@@ -28,10 +28,11 @@ int main() {
 
     //写入文件内容
     fwrite(buffer, strlen(buffer), 1, file2);
-
+    
     //关闭文件
     fclose(file2);
 
+    
     return 0;
 }
 //详见https://zh.cppreference.com/w/c/io/fopen
