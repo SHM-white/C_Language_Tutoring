@@ -14,7 +14,7 @@
 
 ### 方法二：直接看网上现成的[文章](https://www.cnblogs.com/roger-yu/p/15348275.html)吧
 
-可以把文章里下载的MinGW-w64换成本文档最后的[winlibs](https://winlibs.com/)编译的版本（文章里是 `GCC8.1.0`，winlibs截至目前为 `GCC14.2.0`），剩余的就按照文章里来。
+可以把文章里下载的MinGW-w64换成本文档最后的[winlibs](https://winlibs.com/)编译的版本（文章里是 `GCC8.1.0`，winlibs截至目前为 `GCC15.1.0`），剩余的就按照文章里来(看不懂就下载文档末尾常用网站内给的版本，看得懂就下最新`POSIX threads Win64`版本，`7z` `zip`随意保证自己会解压就行)。
 
 ## 关于《C Primer Plus》
 
@@ -74,4 +74,4 @@ c primer plus这本书我之前看过，就跟其他老外的书籍一样，是�
 
 1. cppreference[(https://zh.cppreference.com/)](https://zh.cppreference.com/) [(英文版)](https://en.cppreference.com/) [(离线文档)](https://github.com/myfreeer/cppreference2mshelp/releases/download/2024.09/cppreference-zh-20240915.chm)
 2. [winlibs.com](https://winlibs.com/)(提供编译好的GCC/Clang的Windows版本)
-   [GCC 14.2.0 (with POSIX threads) + LLVM/Clang/LLD/LLDB 19.1.1 + MinGW-w64 12.0.0 UCRT - release 2 (LATEST) Win64 7z archive](https://github.com/brechtsanders/winlibs_mingw/releases/download/14.2.0posix-19.1.1-12.0.0-ucrt-r2/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.1-mingw-w64ucrt-12.0.0-r2.7z)
+   [GCC 14.2.0 (with POSIX threads) + LLVM/Clang/LLD/LLDB 19.1.7 + MinGW-w64 12.0.0 UCRT - release 3  Win64 Zip archive](https://github.com/brechtsanders/winlibs_mingw/releases/download/14.2.0posix-12.0.0-ucrt-r3/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3.zip)
