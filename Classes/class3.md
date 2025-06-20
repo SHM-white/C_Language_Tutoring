@@ -605,4 +605,4 @@ if (file == NULL) {
 
 ### 打开文件访问模式标识：
 ![文件访问模式](../Images/openfile_flags.jpeg)
-### [实例1](../Codes/Usage_Examples/File_Operations.c)、[实例2](../Codes/Usage_Examples/File_Operations_2.c)
+### [实例1](../Codes/Usage_Examples/File_Operations.c)、[实例2](../Codes/Usage_Examples/File_Operations_2.c)、[实例3](../Codes/Usage_Examples/Binanry_file_read_and_write.c)

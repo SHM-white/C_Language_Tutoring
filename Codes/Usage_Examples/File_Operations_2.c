@@ -12,11 +12,8 @@ typedef struct {
 
 int main() {
     Employee emps[N];
-    FILE *fp;
-    int i;
-
     // 输入数据
-    for (i = 0; i < N; i++) {
+    for (int i = 0; i < N; i++) {
         printf("请输入第%d位职工的工号: ", i + 1);
         scanf("%d", &emps[i].no);
         printf("请输入第%d位职工的姓名: ", i + 1);
@@ -29,7 +26,7 @@ int main() {
     }
 
     // 写入二进制文件
-    fp = fopen("emp.dat", "wb");
+    FILE *fp = fopen("emp.dat", "wb");
     if (fp == NULL) {
         perror("无法打开文件");
         exit(1);
