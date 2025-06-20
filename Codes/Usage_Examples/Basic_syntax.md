@@ -148,7 +148,7 @@ int add(int a, int b) {
 
 ```c
 printf("Hello, World! \n");
-return0;
+return 0;
 ```
 
 个单独的分号也可以作为一个空语句，表示什么都不做。例如：

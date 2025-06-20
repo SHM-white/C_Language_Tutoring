@@ -435,7 +435,7 @@ int main() {
     return 0;
 }
 ```
-#### 递归函数
+#### [递归函数](../Codes/Functions/Recursion_Functions.md)
 ```c
 #include <stdio.h>
 int factorial(int n) {
@@ -464,7 +464,7 @@ int main() {
     return 0;
 }
 ```
-#### 排序函数
+#### [排序函数](../Codes/Functions/Sort_Functions.md)
 ```c
 #include <stdio.h>
 void bubble_sort(int arr[], int size) {
@@ -554,3 +554,55 @@ int main() {
     return 0;
 }
 ```
+### [字符串处理函数](../Codes/Functions/String_Functions.md)
+## 9. [结构体](https://cppreference.cn/w/c/language/struct)
+### [typedef语法](https://cppreference.cn/w/c/language/typedef)：
+```c
+typedef type name; // 将type类型重命名为name
+```
+### 结构体声明
+```c
+struct StructName {
+    type member1;
+    type member2;
+    // ...
+};//结构体定义完成后需要添加分号
+//普通定义方式，使用方式为struct StructName var;
+
+// 或者使用typedef创建匿名结构体，并将其命名为StructName，使用方式为StructName var;
+typedef struct {
+    type member1;
+    type member2;
+    // ...
+} StructName; 
+```
+### [链表操作函数](../Codes/Functions/List_Functions.md)
+## 10. [文件操作](https://cppreference.cn/w/c/io)
+### [文件的打开和关闭](https://cppreference.com/w/c/io/fopen)
+```c
+FILE *file = fopen("filename.txt", "r"); // 打开文件，"r"表示以只读模式打开
+if (file == NULL) {
+    perror("Error opening file"); // 打开失败，输出错误信息
+} else {
+    // 文件操作代码
+    fclose(file); // 关闭文件
+}
+```
+### 相关函数及对应函数原型：
+|函数名 | 函数原型 |
+|-------|----------|
+|[`fopen`](https://cppreference.cn/w/c/io/fopen) | `FILE *fopen(const char *filename, const char *mode);` |
+|[`fclose`](https://cppreference.cn/w/c/io/fclose) | `int fclose(FILE *stream);` |
+|[`fread`](https://cppreference.cn/w/c/io/fread) | `size_t fread(void *ptr, size_t size, size_t count, FILE *stream);` |
+|[`fwrite`](https://cppreference.cn/w/c/io/fwrite) | `size_t fwrite(const void *ptr, size_t size, size_t count, FILE *stream);` |
+|[`fgetc`](https://cppreference.cn/w/c/io/fgetc) | `int fgetc(FILE *stream);` |
+|[`fputc`](https://cppreference.cn/w/c/io/fputc) | `int fputc(int char, FILE *stream);` |
+|[`fgets`](https://cppreference.cn/w/c/io/fgets) | `char *fgets(char *str, int num, FILE *stream);` |
+|[`fputs`](https://cppreference.cn/w/c/io/fputs) | `int fputs(const char *str, FILE *stream);` |
+|[`fprintf`](https://cppreference.cn/w/c/io/fprintf) | `int fprintf(FILE *stream, const char *format, ...);` |
+|[`fscanf`](https://cppreference.cn/w/c/io/fscanf) | `int fscanf(FILE *stream, const char *format, ...);` |
+|[`feof`](https://cppreference.cn/w/c/io/feof) | `int feof(FILE *stream);` |
+
+### 打开文件访问模式标识：
+![文件访问模式](../Images/openfile_flags.jpeg)
+### [实例1](../Codes/Usage_Examples/File_Operations.c)、[实例2](../Codes/Usage_Examples/File_Operations_2.c)
