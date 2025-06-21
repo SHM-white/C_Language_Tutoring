@@ -2,7 +2,8 @@
 
 ## 部分代码示例
 
-1. [链表操作](list.c)，[对应题目](../Problems/B3631/README.md)
+1. [链表操作](list.c)，[实例2](./Lists2.c)，[对应题目](../Problems/B3631/README.md)
+2. 文件操作[示例1](./File_Operations.c)，[示例2](./File_Operations_2.c)，[二进制读写](./Binanry_file_read_and_write.c)
 
 ## C基础教程
 

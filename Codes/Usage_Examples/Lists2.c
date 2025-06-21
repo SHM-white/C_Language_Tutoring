@@ -1,47 +1,19 @@
-# 链表操作函数
-[视频演示](https://www.bilibili.com/video/BV1NJ411M7S3/?share_source=copy_web&vd_source=50f551364b1a3340a9149325e92c6314)
-## 0.链表定义：
+#include <stdio.h>
+#include <stdlib.h>
 
-### 单向链表：
-```c
-struct Node {
-    int data;
-    struct Node* next;
-};
-//声明方式：
-struct Node* head = NULL; //头指针
-```
-```c
+// 链表节点定义
 typedef struct Node {
     int data;
     struct Node* next;
 } Node;
-//声明方式：
-Node* head = NULL; //头指针
-```
->后面的函数均以单向链表为例
-### 双向链表：
 
-```c
-typedef struct Node {
-    int data;
-    struct Node* last;
-    struct Node* next;
-} Node;
-//声明方式：
-Node* head = NULL; //头指针
-```
->使用方式可由单向链表的对应函数修改
-## 1. 链表创建函数
-
-```c
-//Create a new node while inputting data in stdin
+// 创建链表（输入-1结束）
 Node* createNode() {
     Node *head = NULL;
     Node *current = NULL;
     while(1){    
         int input;
-        printf("Enter data: ");
+        printf("Enter data (-1 to end): ");
         scanf("%d", &input);
         if(input == -1) break;
         if(head == NULL) {
@@ -53,39 +25,30 @@ Node* createNode() {
         }
         current->data = input;
         current->next = NULL;
-    } //输入-1结束输入
-    //环形链表处理
-    //current->next = head;
+    }
     return head;
 }
-```
-## 2. 链表打印函数
 
-```c
-//Print the linked list
+// 打印链表
 void printList(Node* head) {
     Node* current = head;
+    printf("List: ");
     while(current!= NULL) {
         printf("%d ", current->data);
         current = current->next;
     }
     printf("\n");
 }
-```
 
-## 3. 链表插入函数
-
-```c
-//Insert a new node at the beginning of the linked list
+// 头插法
 void insertAtBeginning(Node** head_ref, int new_data) {
     Node* new_node = (Node*)malloc(sizeof(Node));
     new_node->data = new_data;
     new_node->next = (*head_ref);
     (*head_ref) = new_node;
 }
-```
-```c
-//Insert a new node at the target position of the linked list
+
+// 指定位置插入
 void insertAtPosition(Node** head_ref, int new_data, int position) {
     Node* new_node = (Node*)malloc(sizeof(Node));
     new_node->data = new_data;
@@ -97,8 +60,9 @@ void insertAtPosition(Node** head_ref, int new_data, int position) {
         current = current->next;
         i++;
     }
-    if(current == NULL) {
+    if(current == NULL && i < position) {
         printf("Position is out of range.\n");
+        free(new_node);
         return;
     }
     new_node->next = current;
@@ -108,12 +72,8 @@ void insertAtPosition(Node** head_ref, int new_data, int position) {
         prev->next = new_node;
     }
 }
-```
 
-## 4. 链表删除函数
-
-```c
-//Delete a node from the linked list
+// 删除指定值节点
 void deleteNode(Node** head_ref, int key) {
     Node* current = *head_ref;
     Node* prev = NULL;
@@ -129,9 +89,8 @@ void deleteNode(Node** head_ref, int key) {
     }
     free(current);
 }
-``` 
-```c
-//Delete the entire linked list
+
+// 删除整个链表
 void deleteList(Node** head_ref) {
     Node* current = *head_ref;
     Node* next = NULL;
@@ -142,11 +101,8 @@ void deleteList(Node** head_ref) {
     }
     *head_ref = NULL;
 }
-```
-## 5. 链表合并函数
 
-```c
-//Merge two linked lists
+// 合并两个有序链表
 Node* mergeLists(Node* a, Node* b) {
     Node* result = NULL;
     Node** tail = &result;
@@ -167,5 +123,35 @@ Node* mergeLists(Node* a, Node* b) {
     }
     return result;
 }
-```
-# [应用实例](../Usage_Examples/Lists2.c)
+
+int main() {
+    printf("创建链表A：\n");
+    Node* headA = createNode();
+    printList(headA);
+
+    printf("\n在链表A头部插入99：\n");
+    insertAtBeginning(&headA, 99);
+    printList(headA);
+
+    printf("\n在链表A第3个位置插入77：\n");
+    insertAtPosition(&headA, 77, 3);
+    printList(headA);
+
+    printf("\n删除链表A中的99：\n");
+    deleteNode(&headA, 99);
+    printList(headA);
+
+    printf("\n创建链表B：\n");
+    Node* headB = createNode();
+    printList(headB);
+
+    printf("\n合并链表A和B（假设有序）：\n");
+    Node* merged = mergeLists(headA, headB);
+    printList(merged);
+
+    printf("\n删除合并后的链表：\n");
+    deleteList(&merged);
+    printList(merged);
+
+    return 0;
+}
