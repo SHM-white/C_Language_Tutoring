@@ -1,5 +1,6 @@
 # 链表操作函数
 [视频演示](https://www.bilibili.com/video/BV1NJ411M7S3/?share_source=copy_web&vd_source=50f551364b1a3340a9149325e92c6314)
+[Manim动画](../Videos_By_Manim/README.md)
 ## 0.链表定义：
 
 ### 单向链表：
@@ -35,8 +36,8 @@ Node* head = NULL; //头指针
 ## 1. 链表创建函数
 
 ```c
-//Create a new node while inputting data in stdin
-Node* createNode() {
+//Create a new list while inputting data in stdin
+Node* createList() {
     Node *head = NULL;
     Node *current = NULL;
     while(1){    
