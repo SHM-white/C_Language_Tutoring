@@ -13,9 +13,7 @@
 
 ## 如有问题可以私信教员或直接在群里讨论（学支目前有三位负责程序设计的教员）
 
-## 当前已上`3`节，待上`1`节
-
 - [Class 1](./Classes/class1.md)(2025.2寒假)
 - [Class 2](./Classes/class2.md)(2025.2寒假)
 - Class 3(2025.2寒假)
-- [Class 4](./Classes/class4.md)(2025.6)
+- [Class 4](./Classes/class4.md)(2025.6&2025.12)
