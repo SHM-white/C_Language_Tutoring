@@ -1,39 +1,34 @@
 # C++知识汇总
 
-## 一、C++基础
+- 一、C++基础
+    1. 输入输出
+    2. 标识符类型
+    3. 引用用作函数参数
+    4. 内存动态的分配与释放
+- 二、文件操作
+    1. 文件命名与文件流
+    2. 文件打开读写、关闭文件
 
-### 1. 输入输出
-### 2. 标识符类型
-### 3. 引用用作函数参数
-### 4. 内存动态的分配与释放
-
-## 二、文件操作
-
-### 1. 文件命名与文件流
-### 2. 文件打开读写、关闭文件
-
-## 三、类
-
-### 1. 类的函数成员
-### 2. 构造函数，析构函数
-### 3. 静态成员（static）
-### 4. 友元函数
-### 5. 运算符重载
-### 6. 继承，多态，虚函数，抽象类
-
-## 四、模板
-
-### 1. 函数模板，类模板
+- 三、类
+    1. 类的函数成员
+    2. 构造函数，析构函数
+    3. 静态成员（static）
+    4. 友元函数
+    5. 运算符重载
+    6. 继承，多态，虚函数，抽象类
+- 四、模板
+    1. 函数模板，类模板
 
 ---
 
-### 1. 输入输出
-#### 简单的输入输出
+## 1. 输入输出
+### 简单的输入输出
 ```cpp
     cin >> width;
     cout << "矩形宽度为" << width << endl;
 ```
-格式化输出头文件[`#include <iomanip>`](https://cppreference.cn/w/cpp/header/iomanip)  
+### [格式化输出](https://cppreference.cn/w/cpp/io/manip)
+头文件[`#include <iomanip>`](https://cppreference.cn/w/cpp/header/iomanip)  
 主要操作符有：[`setw`](https://cppreference.cn/w/cpp/io/manip/setw),[`setprecision`](https://cppreference.cn/w/cpp/io/manip/setprecision)和[`setiosflags`](https://cppreference.cn/w/cpp/io/manip/setiosflags)。
 
 `setw` 操作符为每个输出数据项指定宽度，例如：
@@ -59,10 +54,10 @@ cout << "(" << setw(5) << value << ")";
 ```
 (   68)
 ```
-  可以看出，68 占了域宽的最后两个位置，用 3 个空格填充 68 前面的 3 个位置。由于数据在右边，空格在前面，所以称这种对齐方式为右对齐，`setw`仅对与其相邻的一个输出项有效。
-  
-  在 `cout` 输出中，可以采用 `setprecision` 操作符指定浮点数的输出精度，即输出数的有效位数。
- 采用 `setprecision` 指定浮点数的输出精度。
+可以看出，68 占了域宽的最后两个位置，用 3 个空格填充 68 前面的 3 个位置。由于数据在右边，空格在前面，所以称这种对齐方式为右对齐，`setw`仅对与其相邻的一个输出项有效。
+
+在 `cout` 输出中，可以采用 `setprecision` 操作符指定浮点数的输出精度，即输出数的有效位数。
+采用 `setprecision` 指定浮点数的输出精度。
 ```cpp
 #include <iostream>
 using namespace std;
@@ -101,9 +96,11 @@ cout << "\n销售数据\n";
 cout << setprecision(2) << setiosflags(ios::fixed);
 ```
 那么程序的输出结果，无论是否有小数，都将显示 2 位小数。
+
 > $\red{注意}$:
 > `setiosflags` 括号里的内容称为格式状态标志，`ios` 有许多状态标志。`setiosflags` 可用于许多方面的格式化输出，当它的状态标志设定为 `ios::fixed` 时，操作符 `setprecision` 括号内的数字指的是十进制小数的位数，而不再是整个数的位数。  
 > 在上例的输出中，假设程序输出的销售总额是 5422.30。在一般情况下，`cout` 不会输出尾部的零，只有通过 `setiosflags` 和 `setprecision` 指定才会这样输出。在有些情况下，`cout` 也不会输出十进制小数点。例如，下面的语句输出 12，而不是 12.00：
+
 ```cpp
 float number = 12.0f;
 cout << setprecision(4) << number;
@@ -121,31 +118,42 @@ cout << setiosflags(ios::showpoint | ios::fixed)
 ```cpp
 cout.width(5);
 ```
+
 `cout` 对象调用函数成员 `width`，设定输出项的域宽为 5，这和在变量前使用 `setw(5)` 是等同的。
 `cout` 的另外一个函数成员是 `precision`，用来设定浮点数的精度。例如，下面的语句将精度设定为 2：
+
 ```cpp
 cout.precision(2);
 ```
-上述设定将会保持到重新设定或程序的结束。
-cout 的函数成员 setf 用来设置状态标志，它与操作符 setiosflags 的功能相同，例如：
+上述设定将会保持到重新设定或程序的结束。  
+cout 的函数成员 setf 用来设置状态标志，它与操作符 setiosflags 的功能相同，例如：  
+```cpp
 cout.setf(ios::fixed);
+```
 也可以在函数成员 setf 中采用 | 连接多个状态标志，例如：
+```cpp
 cout.setf(ios::fixed | ios::showpoint | ios::left);
+```
 与 setf 功能相反的函数成员是 unsetf，用于清除已经设置的状态标志。例如，下列语句关闭状态标志 ios::fixed 和 ios::left：
+```cpp
 cout.unsetf(ios::fixed | ios::left);
+```
 
-格式化输入
+### 格式化输入
 采用 cin 对象输入数据是最为频繁的一个方法，它的功能很多，就像 C 中常用的 scanf 函数一样，但它比 scanf 更为方便。
- 指定输入域宽
+#### 指定输入域宽  
 cin 与 cout 的功能虽然不同，但它们有许多类似点。例如，都可以指定域宽。cin 的输入域宽可以使用操作符 setw 指定，也可使用 cin.width 函数成员指定。cin 在读入一个字符串时，不能根据字符数组的长度自动读入字符，如果用户输入过多的字符，超过了字符数组的长度，cin 会将多余字符存储到该数组的后面，这就有可能覆盖其他变量。如果为其指定了输入域宽，就可解决这一问题。
 下面定义了一个长度为 10 的字符数组，采用 setw 规定 cin 读入的字符个数不能超过数组的有效范围：
+```cpp
 char word[10];
 cin >> setw(10) >> word;
 同样也可以使用函数成员 width 指定输入域宽：
 cin.width(10);
 cin >> word;
+```
 在上述两种情况下，指定的输入域宽都是 10，cin 将最多读取 9 个字符，因为数组最后一个位置应存储字符 '\0'。
 【例 】 使用操作符 setw 或函数成员 width 控制字符串输入。
+```cpp
 #include <iostream>
 using namespace std;
 #include <iomanip>
@@ -157,375 +165,108 @@ int main()
     cout << "你输入的是：" << word << endl;
     return 0;
 }
+```
+
 【程序运行结果】
-plaintext
+
+```plaintext
 请输入一个单词：Chinese [Enter]
 你输入的是：Chin
+```
+
 【程序解析】 运行该程序时，最多只能读取 4 个有效的字符。可以将上例中：
+
+```cpp
 cin >> setw(5) >> word;
+```
 修改成如下形式，效果等同：
+```cpp
 cin.width(5);
 cin >> word;
-在上面程序中，cin 只读取 4 个字符到字符数组。如果没有指定输入域宽，cin 会读取整个字符串 "Chinese"，这将产生溢出。
-关于 cin 的输入域宽，还要注意以下 3 点：(1) 域宽只对与其相邻的下一个输入有效。(2) 当 cin 遇到空字符时，它将停止读入。空字符包括回车、空格和 Tab 键。(3) 当 cin 读取一定的字符以后，多余的字符将留在缓冲区中。例如，在上例的输入中，由于只读取了 4 个字符，那么留在缓冲区中的字符是 "ese"。
+```
+在上面程序中，`cin` 只读取 4 个字符到字符数组。如果没有指定输入域宽，`cin` 会读取整个字符串 "Chinese"，这将产生溢出。
+关于 `cin` 的输入域宽，还要注意以下 3 点：(1) 域宽只对与其相邻的下一个输入有效。(2) 当 `cin` 遇到空字符时，它将停止读入。空字符包括回车、空格和 Tab 键。(3) 当 `cin` 读取一定的字符以后，多余的字符将留在缓冲区中。例如，在上例的输入中，由于只读取了 4 个字符，那么留在缓冲区中的字符是 "ese"。
 
 读取一行
-cin 提供的函数成员 getline，一次能够读取一行，例如：
+`cin` 提供的函数成员 `getline` ，一次能够读取一行，例如：
+```cpp
 cin.getline(sentence, 20);
-函数的第一个参数是数组名，第二个参数是待读取的字符个数（含空字符）。上述语句将最多读取 19 个字符，最后一个位置用于存储 '\0'。
+```
+函数的第一个参数是数组名，第二个参数是待读取的字符个数（含空字符）。上述语句将最多读取 19 个字符，最后一个位置用于存储 `'\0'`。
 
 读取字符时容易出错的地方
-如果将 cin>> 和 cin.get 混合使用，往往会出现难以发现的问题，例如：
+如果将 `cin >>` 和 `cin.get` 混合使用，往往会出现难以发现的问题，例如：
+```cpp
 cout << "请输入一个整数：";
 cin >> number;
 cout << "请输入一个字符：";
 cin.get(ch);
-假设要给 number 变量读入 100，给 ch 变量读入 H。首先输入 100，并按 Enter 键，结果发现 cin.get 语句被跳过了，根本不给输入字符 H 的机会，这是什么原因呢？
-这是因为 cin>> 和 cin.get 都是从键盘缓冲区（实际上就是一块内存空间）中读入用户的按键。当用户输入 100 并按 Enter 键，此时 Enter 键引起的换行符 '\n' 被存储在键盘缓冲区中。当 cin>> 读入 100 后就停止了，换行符则留在键盘缓冲区中，这意味着 cin.get 读入的字符将是 '\n'，所以就没有输入字符 H 的机会。如何解决这个问题呢？答案是采用 cin 的函数成员 ignore，该函数能够使 cin 对象跳过键盘缓冲区的字符，它的一般形式如下：
+```
+假设要给 number 变量读入 100，给 ch 变量读入 H。首先输入 100，并按 Enter 键，结果发现 `cin.get` 语句被跳过了，根本不给输入字符 H 的机会，这是什么原因呢？
+这是因为 `cin >>` 和 `cin.get` 都是从键盘缓冲区（实际上就是一块内存空间）中读入用户的按键。当用户输入 100 并按 Enter 键，此时 Enter 键引起的换行符 '\n' 被存储在键盘缓冲区中。当 `cin >>` 读入 100 后就停止了，换行符则留在键盘缓冲区中，这意味着 `cin.get` 读入的字符将是 '\n'，所以就没有输入字符 H 的机会。如何解决这个问题呢？答案是采用 cin 的函数成员 `ignore`，该函数能够使 cin 对象跳过键盘缓冲区的字符，它的一般形式如下：
+```cpp
 cin.ignore(n, c);
-ignore 括号中的参数都是可选的，其中 n 是一个整数，c 是一个字符。含义是 cin 跳越 n 个字符，或者是直到遇到字符 c 为止。例如，下面的语句使 cin 跳越 20 个字符，或者是遇到一个换行符，哪一种情况先出现都可以，都将停止 cin 的跳越：
+```
+函数原型`std::basic_istream<CharT,Traits>::ignore`：
+```cpp
+basic_istream& ignore( std::streamsize count = 1, int_type delim = Traits::eof() );
+```
+从输入流中提取并丢弃字符，直到并包括 delim。  
+`ignore` 括号中的参数都是可选的，其中 n 是一个整数，c 是一个字符。含义是 cin 跳越 n 个字符，或者是直到遇到字符 c 为止。例如，下面的语句使 cin 跳越 20 个字符，或者是遇到一个换行符，哪一种情况先出现都可以，都将停止 cin 的跳越：
+```cpp
 cin.ignore(20, '\n');
+```
 如果 cin.ignore 没有参数，表示跳过键盘缓冲区中的第一个字符，例如：
+```cpp
 cin.ignore();
-解决 cin>> 和 cin.get 混合出现问题的方法是：在 cin>> 语句之后加一条 cin.ignore 语句：
+```
+解决 `cin >>` 和 `cin.get `混合出现问题的方法是：在 `cin >>` 语句之后加一条 `cin.ignore` 语句：
+```cpp
 cout << "请输入一个整数：";
 cin >> number;
 cin.ignore();                // 忽略 number 后面的一个字符
 cout << "请输入一个字符：";
 cin.get(ch);
+```
+
+
+## 类型
+对象、引用、函数（包括函数模板特化）和表达式都具有一个称为**类型**的属性，该属性既限制了这些实体允许的操作，又为原本通用的位序列提供了语义含义。
+
+### [类型分类](https://cppreference.cn/w/cpp/language/type)
 
 ### 引用用作函数参数
-按值传递是 C 语言中常用的参数传递方法，C++ 除了支持按值传递以外，还支持按引用传递。通过引用作参数，可以修改调用函数中的变量，它比传递指针方便得多。
-下面首先举一个通俗的例子说明什么是引用。假设你的大名叫张三，小名（即别名）叫李四，那么张三和李四都是你的名字，我们可以说张三和李四都是你的引用。张三的任何变化（如长高 2cm）在李四身上都有反映。C++ 的引用变量，简称为引用，它是另外一个变量的别名，对引用变量的任何修改都将影响该引用所代表的变量。通过引用作函数参数，一个函数就可改变另外一个函数中的变量。
-定义引用与定义一般变量类似，只需在变量名前加一个符号 &。例如，下面的函数将参数 refVar 定义为引用：
+按值传递是 C 语言中常用的参数传递方法，C++ 除了支持按值传递以外，还支持按引用传递。通过引用作参数，可以修改调用函数中的变量，它比传递指针方便得多。  
+下面首先举一个通俗的例子说明什么是引用。假设你的大名叫张三，小名（即别名）叫李四，那么张三和李四都是你的名字，我们可以说张三和李四都是你的引用。张三的任何变化（如长高 2cm）在李四身上都有反映。C++ 的引用变量，简称为引用，它是另外一个变量的别名，对引用变量的任何修改都将影响该引用所代表的变量。通过引用作函数参数，一个函数就可改变另外一个函数中的变量。  
+定义引用与定义一般变量类似，只需在变量名前加一个符号 `&`。例如，下面的函数将参数 `refVar` 定义为引用：
+```cpp
 void doubleNum(int & refVar)
 {
     refVar *= 2;
 }
-在定义函数原型时，如果参数是引用，只要在类型之后加一个符号 & 即可。例如，下面是函数 doubleNum 的原型：
+```
+在定义函数原型时，如果参数是引用，只要在类型之后加一个符号 & 即可。例如，下面是函数 `doubleNum` 的原型：
+```cpp
 void doubleNum(int&);
+// 建议还是写成void doubleNum(int &refVar);
+```
+## 动态内存管理([低级内存管理](https://cppreference.cn/w/cpp/memory/new))
 
-#### 类型
-对象、引用、函数（包括函数模板特化）和表达式都具有一个称为**类型**的属性，该属性既限制了这些实体允许的操作，又为原本通用的位序列提供了语义含义。
+### [`new` 表达式](https://cppreference.cn/w/cpp/memory/new/operator_new)
 
-类型分类
-C++ 类型系统包含以下类型
+### [`delete` 表达式](https://cppreference.cn/w/cpp/memory/new/operator_delete)
 
-基本类型（另请参阅 std::is_fundamental）
-类型 void（另请参阅 std::is_void）；
-类型 std::nullptr_t（另请参阅 std::is_null_pointer）；
-(C++11 起)
-算术类型（另请参阅 std::is_arithmetic）
-整型类型（包括cv 限定版本，另请参阅 std::is_integral，整型类型的同义词是整数类型）
-类型 bool；
-字符类型
-窄字符类型
-普通字符类型：char、signed char、unsigned char[1]
-类型 char8_t
-(C++20 起)
-宽字符类型：char16_t、char32_t，(C++11 起)wchar_t；
-有符号整型类型
-标准有符号整型类型：signed char、short、int、long、long long；
-扩展有符号整型类型（由实现定义）；
-(C++11 起)
-无符号整型类型
-标准无符号整型类型：unsigned char、unsigned short、unsigned、unsigned long、unsigned long long；
-扩展无符号整型类型（每个都对应一个扩展有符号整型类型，反之亦然）；
-(C++11 起)
-浮点类型（另请参阅 std::is_floating_point）
-标准浮点类型：float、double、long double 及其cv 限定版本；
-扩展浮点类型（包括cv 限定版本）
-定宽浮点类型;
-其他实现定义的扩展浮点类型；
-(C++23 起)
-复合类型（另请参阅 std::is_compound）
-引用类型（另请参阅 std::is_reference）
-左值引用类型（另请参阅 std::is_lvalue_reference）
-到对象类型的左值引用；
-到函数类型的左值引用；
-右值引用类型（另请参阅 std::is_rvalue_reference）
-到对象类型的右值引用；
-到函数类型的右值引用；
-(C++11 起)
-指针类型（另请参阅 std::is_pointer）
-对象指针类型;
-函数指针类型;
-成员指针类型（另请参阅 std::is_member_pointer）
-数据成员指针类型（另请参阅 std::is_member_object_pointer）；
-成员函数指针类型（另请参阅 std::is_member_function_pointer）；
-数组类型（另请参阅 std::is_array）；
-函数类型（另请参阅 std::is_function）；
-枚举类型（另请参阅 std::is_enum）；
-无作用域枚举类型;
-有作用域枚举类型（另请参阅 std::is_scoped_enum）；
-(C++11 起)
-类类型:
-非联合类型（另请参阅 std::is_class）；
-联合类型（另请参阅 std::is_union）。
-↑ signed char 和 unsigned char 是窄字符类型，但它们不是字符类型。换句话说，窄字符类型的集合不是字符类型集合的子集。
-对于除引用和函数之外的每个非 cv 限定类型，类型系统支持该类型的三个额外的cv 限定版本（const、volatile 和 const volatile）。
-
-#### 动态内存管理
-##### new 表达式
- C++ C++ 语言 表达式 
-创建并初始化具有动态存储期的对象，即生命期不一定受其创建范围限制的对象。
-
-语法
-::(可选) new (类型 ﻿) new-initializer ﻿(可选)	(1)	
-::(可选) new 类型 new-initializer ﻿(可选)	(2)	
-::(可选) new (placement-args ﻿) (类型 ﻿) new-initializer ﻿(可选)	(3)	
-::(可选) new (placement-args ﻿) 类型 new-initializer ﻿(可选)	(4)	
-1,2) 尝试创建由类型标识 类型 指示的类型的对象，它可以是数组类型，并且可以包含占位符类型说明符(C++11 起)，或者包含其参数将通过类模板参数推导进行推导的类模板名称(C++17 起)。
-3,4) 同 (1,2)，但为分配函数提供附加参数，参见定位 new。
-解释
-类型	-	目标类型标识符
-new-initializer	-	一个用括号括起来的表达式列表或用花括号括起来的初始化器列表(C++11 起)
-placement-args	-	额外的定位参数
-
-new 表达式尝试分配存储，然后尝试在分配的存储中构造并初始化一个无名对象或一个无名对象数组。new 表达式返回一个指向已构造对象的纯右值指针，如果构造的是对象数组，则返回指向数组初始元素的指针。
-
-如果 类型 包含括号，则需要使用语法 (1) 或 (3)。
-
-new int(*[10])();    // error: parsed as (new int) (*[10]) ()
-new (int (*[10])()); // okay: allocates an array of 10 pointers to functions
-此外，类型 会被贪婪地解析：它将包含所有可以作为声明符一部分的标记。
-
-new int + 1; // okay: parsed as (new int) + 1, increments a pointer returned by new int
-new int * 1; // error: parsed as (new int*) (1)
-如果满足以下条件，则 new-initializer 不可省略：
-
-类型 是未知边界的数组，
-类型 中使用了占位符，即 auto 或 decltype(auto)(C++14 起)，可能与类型约束结合使用(C++20 起)，
-(C++11 起)
-类型 中使用了需要推导其参数的类模板。
-(C++17 起)
-double* p = new double[]{1, 2, 3}; // creates an array of type double[3]
-auto p = new auto('c');            // creates a single object of type char. p is a char*
- 
-auto q = new std::integral auto(1);         // OK: q is an int*
-auto q = new std::floating_point auto(true) // ERROR: type constraint not satisfied
- 
-auto r = new std::pair(1, true); // OK: r is a std::pair<int, bool>*
-auto r = new std::vector;        // ERROR: element type can't be deduced
-动态数组
-如果 类型 是数组类型，则除第一个维度之外的所有维度都必须指定为正的整型常量表达式(C++14 前)转换为 std::size_t 类型的常量表达式(C++14 起)，但（仅在使用非括号语法 (2) 和 (4) 时）第一个维度可以是整型、枚举类型或具有单个非显式转换函数到整型或枚举类型的类类型表达式(C++14 前)任何可转换为 std::size_t 的表达式(C++14 起)。这是直接创建在运行时定义大小的数组的唯一方法，此类数组通常被称为动态数组。
-
-int n = 42;
-double a[n][5]; // error
-auto p1 = new  double[n][5];  // OK
-auto p2 = new  double[5][n];  // error: only the first dimension may be non-constant
-auto p3 = new (double[n][5]); // error: syntax (1) cannot be used for dynamic arrays
-如果第一个维度中的值（如果需要，转换为整型或枚举类型）为负，则行为未定义。
-
-(C++11 前)
-在以下情况下，指定第一个维度的表达式值无效：
-
-表达式是非类类型，其在转换为 std::size_t 之前的值为负；
-表达式是类类型，其在用户定义的转换函数之后和第二次标准转换之前的值为负；
-表达式的值大于某个实现定义的最大值；
-值小于花括号初始化器列表中提供的数组元素数量（包括字符串字面量末尾的 '\0'）。
-如果第一个维度中的值由于上述任何原因无效，则：
-
-如果在转换为 std::size_t 后，第一个维度是核心常量表达式并且它可能被求值，则程序格式错误，
-否则，如果将要调用的分配函数是非抛出的（包括未声明 noexcept 的 std::nothrow 重载），则 new 表达式返回所需结果类型的空指针，
-否则，new 表达式不调用分配函数，而是抛出类型为std::bad_array_new_length 的处理程序能够匹配的异常。
-(C++11 起)
-第一个维度为零是允许的，并且会调用分配函数。
-
-如果 new-initializer 是花括号初始化器列表，并且第一个维度可能被求值且不是核心常量表达式，则会检查从空初始化器列表复制初始化数组假设元素的语义约束。
-
-(C++11 起)
-分配
-new 表达式通过调用适当的分配函数来分配存储。如果 类型 是非数组类型，则函数名为 operator new。如果 类型 是数组类型，则函数名为 operator new[]。
-
-如分配函数中所述，C++ 程序可以为这些函数提供全局和类特定的替换。如果 new 表达式以可选的 :: 运算符开头，如 ::new T 或 ::new T[n]，则类特定的替换将被忽略（该函数在全局作用域中查找）。否则，如果 T 是类类型，则查找从 T 的类作用域开始。
-
-调用分配函数时，new 表达式将请求的字节数作为第一个类型为 std::size_t 的参数传递，对于非数组 T，这恰好是 sizeof(T)。
-
-
-数组分配可能提供未指定的开销，此开销在每次 new 调用之间可能有所不同，除非所选分配函数是标准非分配形式。new 表达式返回的指针将与分配函数返回的指针偏移该值。许多实现使用数组开销来存储数组中的对象数量，delete[] 表达式使用此数量来调用正确数量的析构函数。此外，如果 new 表达式用于分配 char、unsigned char 或 std::byte(C++17 起) 的数组，如果需要，它可能会从分配函数请求额外的内存，以确保所有类型不大于请求数组大小的对象都能正确对齐（如果稍后将一个对象放入已分配的数组中）。
-
-new 表达式可以省略或合并通过可替换分配函数进行的分配。在省略的情况下，存储可能由编译器提供，而无需调用分配函数（这也允许优化掉未使用的 new 表达式）。在合并的情况下，new 表达式 E1 的分配可以扩展以提供额外的存储给另一个 new 表达式 E2，如果满足以下所有条件：
-
-1) E1 分配的对象的生命期严格包含 E2 分配的对象的生命期。
-2) E1 和 E2 将调用相同的可替换全局分配函数。
-3) 对于抛出异常的分配函数，E1 和 E2 中的异常将在同一个处理程序中首次捕获。
-请注意，此优化仅在使用 new 表达式时才允许，而不是通过任何其他方法调用可替换分配函数：delete[] new int[10]; 可以被优化掉，但 operator delete(operator new(10)); 则不能。
-
-(C++14 起)
-在求值常量表达式期间，对分配函数的调用总是被省略。只有原本会导致调用可替换全局分配函数的 new 表达式才能在常量表达式中求值。
-
-(C++20 起)
-
-定位 new
-
-如果提供了 placement-args，它们将作为附加参数传递给分配函数。此类分配函数被称为“定位 new”，得名于标准分配函数 void* operator new(std::size_t, void*)，它只是原封不动地返回其第二个参数。这用于在已分配的存储中构造对象。
-
-// within any block scope...
-{
-    // Statically allocate the storage with automatic storage duration
-    // which is large enough for any object of type “T”.
-    alignas(T) unsigned char buf[sizeof(T)];
- 
-    T* tptr = new(buf) T; // Construct a “T” object, placing it directly into your 
-                          // pre-allocated storage at memory address “buf”.
- 
-    tptr->~T();           // You must **manually** call the object's destructor
-                          // if its side effects is depended by the program.
-}                         // Leaving this block scope automatically deallocates “buf”.
-
-注意：此功能由分配器（Allocator）类的成员函数封装。
-
-当分配其对齐要求超过 __STDCPP_DEFAULT_NEW_ALIGNMENT__ 的对象或此类对象的数组时，new 表达式将对齐要求（封装在 std::align_val_t 中）作为分配函数的第二个参数传递（对于定位形式，placement-arg 出现在对齐参数之后，作为第三、第四等参数）。如果重载解析失败（当定义了具有不同签名的类特定分配函数时发生，因为它隐藏了全局函数），则会尝试第二次重载解析，此时参数列表中不包含对齐参数。这允许对齐不敏感的类特定分配函数优先于全局对齐敏感的分配函数。
-
-(C++17 起)
-new T;      // calls operator new(sizeof(T))
-            // (C++17) or operator new(sizeof(T), std::align_val_t(alignof(T))))
-new T[5];   // calls operator new[](sizeof(T)*5 + overhead)
-            // (C++17) or operator new(sizeof(T)*5+overhead, std::align_val_t(alignof(T))))
-new(2,f) T; // calls operator new(sizeof(T), 2, f)
-            // (C++17) or operator new(sizeof(T), std::align_val_t(alignof(T)), 2, f)
-如果一个不抛出异常的分配函数（例如通过 new(std::nothrow) T 选择的那个）由于分配失败而返回空指针，则 new 表达式立即返回，它不会尝试初始化对象或调用 deallocation 函数。如果将空指针作为参数传递给不分配内存的定位 new 表达式，这会使所选的标准不分配内存的定位分配函数返回空指针，则行为是未定义的。
-
-初始化
-
-由 new 表达式创建的对象根据以下规则初始化。
-
-如果 类型 不是数组类型，则单个对象在获得的内存区域中构造：
-
-如果 new-initializer 不存在，则对象是默认初始化的。
-如果 new-initializer 是用括号括起来的表达式列表，则对象是直接初始化的。
-如果 new-initializer 是用花括号括起来的初始化器列表，则对象是列表初始化的。
-(C++11 起)
-如果 类型 是数组类型，则初始化对象数组：
-
-如果 new-initializer 不存在，则每个元素都默认初始化。
-即使第一个维度为零，仍然需要满足默认初始化假设元素的语义约束。
-如果 new-initializer 是一对括号，则每个元素都值初始化。
-即使第一个维度为零，仍然需要满足值初始化假设元素的语义约束。
-如果 new-initializer 是用花括号括起来的初始化器列表，则数组是聚合初始化的。
-(C++11 起)
-如果 new-initializer 是用括号括起来的非空表达式列表，则数组是聚合初始化的。
-(C++20 起)
-初始化失败
-如果初始化通过抛出异常（例如来自构造函数）而终止，则程序会查找匹配的 deallocation 函数，然后：
-
-如果可以找到合适的 deallocation 函数，则调用该 deallocation 函数来释放正在构造对象的内存。之后，异常在 new 表达式的上下文中继续传播。
-如果找不到明确匹配的 deallocation 函数，则传播异常不会导致对象内存被释放。这仅在被调用的分配函数不分配内存时才适用，否则很可能会导致内存泄漏。
-匹配 deallocation 函数的查找范围确定如下：
-
-如果 new 表达式不以 :: 开头，且分配类型是类类型 T 或类类型 T 的数组，则在 T 的类作用域中搜索 deallocation 函数的名称。
-否则，或者如果在 T 的类作用域中未找到任何内容，则通过在全局作用域中搜索来查找 deallocation 函数的名称。
-对于非定位分配函数，使用正常的 deallocation 函数查找来查找匹配的 deallocation 函数（参见delete-expression）。
-
-对于定位分配函数，匹配的 deallocation 函数必须具有相同数量的参数，并且除了第一个参数之外的每个参数类型都与分配函数的相应参数类型相同（在参数转换之后）。
-
-如果查找找到一个匹配的 deallocation 函数，则将调用该函数；否则，将不调用任何 deallocation 函数。
-如果查找找到一个非定位 deallocation 函数，并且该函数作为定位 deallocation 函数，本应被选为分配函数的匹配，则程序格式错误。
-在任何情况下，匹配的 deallocation 函数（如果有）必须是未删除且(C++11 起)在 new 表达式出现的位置可访问的。
-
-struct S
-{
-    // Placement allocation function:
-    static void* operator new(std::size_t, std::size_t);
- 
-    // Non-placement deallocation function:
-    static void operator delete(void*, std::size_t);
-};
- 
-S* p = new (0) S; // error: non-placement deallocation function matches
-                  //        placement allocation function
-如果在 new 表达式中调用 deallocation 函数（由于初始化失败），则传递给该函数的参数确定如下：
-
-第一个参数是从分配函数调用返回的值（类型为 void*）。
-其他参数（仅适用于定位 deallocation 函数）是传递给定位分配函数的 placement-args。
-如果允许实现引入临时对象或复制任何参数作为调用分配函数的一部分，则未指定是否在分配函数和 deallocation 函数的调用中使用相同的对象。
-
-内存泄漏
-由 new 表达式创建的对象（具有动态存储期的对象）会一直存在，直到 new 表达式返回的指针在匹配的delete-expression中使用。如果指针的原始值丢失，对象将无法访问且无法释放：发生内存泄漏。
-
-这可能在以下情况下发生：指针被赋值，
-
-int* p = new int(7); // dynamically allocated int with value 7
-p = nullptr; // memory leak
-或者指针超出作用域，
-
-void f()
-{
-    int* p = new int(7);
-} // memory leak
-或者由于异常。
-
-void f()
-{
-    int* p = new int(7);
-    g();      // may throw
-    delete p; // okay if no exception
-} // memory leak if g() throws
-为了简化动态分配对象的管理，new 表达式的结果通常存储在智能指针中：std::auto_ptr (C++17 前)std::unique_ptr 或 std::shared_ptr(C++11 起)。这些指针保证在上述情况下执行 delete 表达式。
-
-##### delete 表达式
-销毁先前由 new 表达式 分配的对象并释放获取的内存区域。
-
-语法
-::(可选) delete   表达式	(1)	
-::(可选) delete[] 表达式	(2)	
-表达式	-	以下之一
-类类型表达式，可隐式转换为对象类型指针
-对象类型指针的纯右值
-1) 销毁由 new 表达式 创建的一个非数组对象。
-2) 销毁由 new[] 表达式 创建的数组。
-解释
-给定从 表达式 评估出的指针（在可能的转换之后）为 ptr。
-
-1) ptr 必须是以下之一
-空指针，
-指向由 new 表达式 创建的非数组对象的指针，或
-指向由 new 表达式 创建的非数组对象的基子对象的指针。
- ptr 所指向的类型必须与对象类型（或基子对象的类型）相似。如果 ptr 是其他任何类型，包括通过 new 表达式 的数组形式获得的指针，则行为是未定义的。
-2) ptr 必须是空指针，或者其值是通过 new 表达式 的数组形式先前获得的指针，且其分配函数不是非分配形式（即重载 (10)）。
- ptr 所指向的类型必须与数组对象的元素类型相似。如果 ptr 是其他任何类型，包括通过 new 表达式 的非数组形式获得的指针，则行为是未定义的。
-delete 表达式的结果总是 void 类型。
-
-如果在删除时，被删除的对象具有不完整的类类型，并且完整类具有非平凡析构函数或解除分配函数，则行为是未定义的(C++26 之前)则程序格式错误(C++26 起)。
-
-如果 ptr 不是空指针且解除分配函数不是销毁性删除(C++20 起)，则 delete 表达式会为被销毁的对象或数组的每个元素（从数组的最后一个元素到第一个元素）调用析构函数（如果有）。析构函数必须从 delete 表达式出现的位置可访问。
-
-之后，无论析构函数是否抛出异常，delete 表达式都会调用解除分配函数：operator delete（第一种形式）或 operator delete[]（第二种形式），除非匹配的 new 表达式与另一个 new 表达式结合使用(C++14 起)。
-
-解除分配函数的名称在 ptr 所指向对象的动态类型的范围内进行查找，这意味着如果存在类特定的解除分配函数，它们会在全局解除分配函数之前被找到。如果 delete 表达式中存在 ::，则此查找仅检查全局命名空间。在任何情况下，除了常用解除分配函数之外的任何声明都将被丢弃。
-
-如果找到任何解除分配函数，则按照以下方式选择要调用的函数（有关这些函数及其效果的更详细描述，请参阅解除分配函数）
-
-如果至少有一个解除分配函数是销毁性删除，则所有非销毁性删除都被忽略。
-(C++20 起)
-如果类型的对齐要求超过 __STDCPP_DEFAULT_NEW_ALIGNMENT__，则优先选择对齐感知解除分配函数（带有 std::align_val_t 类型的参数）。对于其他类型，则优先选择对齐无关解除分配函数（不带 std::align_val_t 类型的参数）。
-如果找到多个首选函数，则在下一步中仅考虑首选函数。
-如果未找到首选函数，则在下一步中考虑非首选函数。
-如果只剩下一个函数，则选择该函数。
-(C++17 起)
-如果找到的解除分配函数是类特定的，则无大小感知的类特定解除分配函数（不带 std::size_t 类型的参数）优先于大小感知的类特定解除分配函数（带 std::size_t 类型的参数）。
-否则，查找到达全局作用域，并且
-如果类型是完整的，并且（仅对于数组形式）操作数是指向具有非平凡析构函数的类类型或其（可能多维）数组的指针，则选择全局大小感知的全局函数（带 std::size_t 类型的参数）。
-否则，是选择全局大小感知的解除分配函数（带 std::size_t 类型的参数）还是全局无大小感知的解除分配函数（不带 std::size_t 类型的参数）是未指定的。
-(C++14 起)
-选择的解除分配函数必须从 delete 表达式出现的位置可访问，除非解除分配函数是在动态类型的虚析构函数的定义点选择的。
-
-要回收的存储块的指针作为第一个参数传递给上述过程选择的解除分配函数。块的大小作为可选的 std::size_t 参数传递。对齐要求作为可选的 std::align_val_t 参数传递。(C++17 起)
-
-如果 ptr 是空指针值，则不调用析构函数，解除分配函数可能被调用也可能不被调用（未指定），但默认的解除分配函数保证在传递空指针时不做任何事情。
-
-如果 ptr 是指向使用 new 分配的对象的基类子对象的指针，则基类的析构函数必须是虚函数，否则行为是未定义的。
+只需记住`new`和`delete`总是成对出现，`new []`和`delete[]`也总是成对出现。
 
 ## 二、文件操作
 
-### 文件流类
+### [文件流类](https://cppreference.cn/w/cpp/io#Stream-based_I.2FO)
 **知识点：** C++提供三种文件流类
 
 **类型：**
-- `ifstream`：输入文件流（读）
-- `ofstream`：输出文件流（写）
-- `fstream`：输入输出文件流（读写）
+- [`ifstream`](https://cppreference.cn/w/cpp/io/basic_ifstream)：输入文件流（读）
+- [`ofstream`](https://cppreference.cn/w/cpp/io/basic_ofstream)：输出文件流（写）
+- [`fstream`](https://cppreference.cn/w/cpp/io/basic_fstream)：输入输出文件流（读写）
 
 **相关项目：** FileOperation, BankAccountProject, BankAccount2
 
@@ -582,141 +323,12 @@ ofstream fout("file.txt", ios::app);
 
 
 
-三.
-~~类
- C++ C++ 语言 类 
-类是用户定义类型。
-
-类类型由类说明符定义，其出现在声明语法的 decl-specifier-seq 中。参阅类声明以了解类说明符的语法。
-
-类可以有以下种类的成员
-
-1) 数据成员
-a) 非静态数据成员，包括位域。
-b) 静态数据成员
-2) 成员函数
-a) 非静态成员函数
-b) 静态成员函数
-3) 嵌套类型
-a) 类定义中定义的嵌套类和枚举
-b) 现有类型的别名，通过 typedef 或类型别名(C++11 起)声明定义
-c) 类自身定义中的类名，在查找时作为其自身的公有成员类型别名（除了用于命名构造函数时）：这被称为注入类名
-4) 类中定义的所有无作用域枚举的枚举器，或通过using-声明或using-enum-声明引入的枚举器(C++20 起)
-5) 成员模板（变量模板、(C++14 起)类模板或函数模板）可以出现在任何非局部类/结构体/联合体的体中。
-所有成员都在类定义中一次性定义，不能添加到已定义的类中（与命名空间成员不同）。
-
-如果类 T 的成员是以下之一，则不能使用 T 作为其名称：
-
-静态数据成员，
-成员函数，
-成员类型，
-成员模板，
-枚举的枚举器（除非枚举有作用域）(C++11 起)，或
-成员匿名联合的成员。
-然而，只要没有用户声明的构造函数，非静态数据成员可以使用名称 T。
-
-一个至少有一个声明或继承的虚成员函数的类是多态的。此类型的对象是多态对象，并在对象表示中存储运行时类型信息，可以使用 dynamic_cast 和 typeid 查询。虚成员函数参与动态绑定。
-
-一个至少有一个声明或继承的纯虚成员函数的类是抽象类。此类型的对象不能被创建。
-
-具有 constexpr 构造函数的类是字面类型：此类型的对象可以在编译时由 constexpr 函数操纵。
-
-(C++11 起)
-类的属性
-平凡可复制类
-
-一个平凡可复制类是指：
-
-至少有一个合格的复制构造函数、移动构造函数、复制赋值运算符或移动赋值运算符，
-每个合格的复制构造函数都是平凡的
-每个合格的移动构造函数都是平凡的
-每个合格的复制赋值运算符都是平凡的
-每个合格的移动赋值运算符都是平凡的，以及
-有一个非删除的平凡析构函数。
-平凡类
-一个平凡类是指：
-
-是平凡可复制的，并且
-有一个或多个合格的默认构造函数，且每个都是平凡的。
-（C++26 中已弃用）
-标准布局类
-
-一个标准布局类是指：
-
-没有非标准布局类类型（或此类类型的数组）或引用类型的非静态数据成员，
-没有虚函数且没有虚基类，
-所有非静态数据成员具有相同的访问控制，
-没有非标准布局基类，
-继承层次中只有一个类拥有非静态数据成员，以及
-非正式地说，没有基类与第一个非静态数据成员的类型相同。或，正式地说：给定类 S，其没有类型集合 M(S) 中的任何元素作为基类，其中类型 X 的 M(X) 定义如下：
-如果 X 是一个没有（可能继承的）非静态数据成员的非联合类类型，则集合 M(X) 为空。
-如果 X 是一个非联合类类型，其第一个非静态数据成员的类型为 X0（其中所述成员可能是匿名联合），则集合 M(X) 由 X0 和 M(X0) 的元素组成。
-如果 X 是一个联合类型，则集合 M(X) 是所有 M(Ui) 和包含所有 Ui 的集合的并集，其中每个 Ui 是 X 的第 i 个非静态数据成员的类型。
-如果 X 是一个元素类型为 Xe 的数组类型，则集合 M(X) 由 Xe 和 M(Xe) 的元素组成。
-如果 X 是非类、非数组类型，则集合 M(X) 为空。
-标准布局结构体是使用类关键词 struct 或类关键词 class 定义的标准布局类。标准布局联合体是使用类关键词 union 定义的标准布局类。
-
-(C++11 起)
-隐式生命周期类
-
-一个隐式生命周期类是指：
-
-是一个聚合体，其析构函数不是用户声明的(C++11 前)用户提供的(C++11 起)，或
-至少有一个平凡的合格构造函数和一个平凡的、非删除的析构函数。
-注：缺陷报告 P0593R6 澄清了隐式生命周期属性。
-
-POD 类
-一个POD 类是指：
-
-是一个聚合体，
-没有用户声明的复制赋值运算符，
-没有用户声明的析构函数，以及
-没有非POD类类型（或此类类型的数组）或引用类型的非静态数据成员。
-(C++11 前)
-是一个平凡类，
-是一个标准布局类，以及
-没有非POD类类型（或此类类型的数组）的非静态数据成员。
-(C++11 起)
-POD 结构体是非联合 POD 类。POD 联合体是作为 POD 类的联合体。
+## 三. [类](https://cppreference.cn/w/cpp/language/classes)
 
 
+### [类声明](https://cppreference.cn/w/cpp/language/class)
 
-
-
-~~类声明
- C++ C++ 语言 类 
-类是用户定义类型，由 class-specifier 定义，它出现在声明语法的 decl-specifier-seq 中。
-
-语法
-类说明符具有以下语法：
-
-class-key attr ﻿(可选) class-head-name class-property-specs ﻿(可选) base-clause ﻿(可选)
-{ member-specification }	(1)	
-class-key attr ﻿(可选) base-clause ﻿(可选)
-{ member-specification }	(2)	
-1) 命名类定义
-2) 匿名类定义
-类键	-	其中之一是 class、struct 和 union。关键字 class 和 struct 除了默认成员访问权限和默认基类访问权限外是相同的。如果它是 union，则此声明引入一个联合类型。
-属性	-	(C++11 起) 任意数量的属性，可以包含 alignas 说明符
-class-head-name	-	正在定义的类的名称，可选地限定
-class-property-specs	-	以下说明符的列表，每个说明符在每个序列中最多允许出现一次。
-说明符	效果
-final
-(C++11 起)	指定类不能被派生
-trivially_relocatable_if_eligible     
-(C++26 起)	如果符合条件，将类标记为可平凡重定位
-replaceable_if_eligible     
-(C++26 起)	如果符合条件，将类标记为可替换
-base-clause	-	一个或多个基类的列表，以及每个基类使用的继承模型（参见派生类）
-member-specification	-	访问说明符、成员对象和成员函数声明和定义的列表（见下文）
-前向声明
-
-以下形式的声明
-
-class-key attr identifier ;		
-声明了一个将在该作用域中稍后定义的类类型。在定义出现之前，此类名具有不完整类型。这允许类之间相互引用
-
-
+```cpp
 class Vector; // forward declaration
  
 class Matrix
@@ -730,9 +342,10 @@ class Vector
     // ...
     friend Vector operator*(const Matrix&, const Vector&);
 };
+```
 如果特定源文件只使用指向类的指针和引用，这使得减少 #include 依赖成为可能。
 
-
+```cpp
 // In MyStruct.h
 #include <iosfwd> // contains forward declaration of std::ostream
  
@@ -742,9 +355,10 @@ struct MyStruct
     friend std::ostream& operator<<(std::ostream& os, const S& s);
     // definition provided in MyStruct.cpp file which uses #include <ostream>
 };
+```
 如果前向声明出现在局部作用域中，它会隐藏之前声明的类、变量、函数以及在封闭作用域中可能出现的同名所有其他声明。
 
-
+```cpp
 struct s { int a; };
 struct s; // does nothing (s already defined in this scope)
  
@@ -757,9 +371,10 @@ void g()
  
     struct s { char* p; }; // definitions of the local struct s
 }
+```
 请注意，新的类名也可以通过作为另一个声明的一部分出现的详细类型说明符引入，但前提是名称查找无法找到之前声明的同名类。
 
-
+```cpp
 class U;
  
 namespace ns
@@ -772,6 +387,7 @@ namespace ns
     Y* p;
     T* q;
 }
+```
 成员规范
 
 成员规范，或类定义的主体，是包含在花括号中的任意数量的以下内容的序列：
