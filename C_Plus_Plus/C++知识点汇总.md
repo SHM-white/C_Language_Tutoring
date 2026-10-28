@@ -780,8 +780,7 @@ T add(T a, T b) {
 }
 
 // 特化版本
-template <>
-string add<string>(string a, string b) {
+string add(string a, string b) {
     return a + " + " + b;
 }
 ```
